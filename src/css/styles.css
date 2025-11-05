@@ -8,11 +8,14 @@
 @import url('./reset.css');
 @import url('./base.css');
 @import url('./container.css');
-@import url('./animations.css');
 
 /* Sections style */
-@import url('./header.css');
-@import url('./vite-promo.css');
-@import url('./badges.css');
-@import url('./back-link.css');
-@import url('./footer.css');
+@import url('./sections-css/header.css');
+@import url('./sections-css/hero.css');
+@import url('./sections-css/furniture-list.css');
+@import url('./sections-css/about-us.css');
+@import url('./sections-css/FAQ.css');
+@import url('./sections-css/feedback.css');
+@import url('./sections-css/furniture-details-modal.css');
+@import url('./sections-css/order-modal.css');
+@import url('./sections-css/footer.css');
