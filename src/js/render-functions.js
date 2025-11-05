@@ -45,7 +45,7 @@ export const renderProducts = data => {
 
       return `
         <li class="product-card">
-          <img src="${firstImage}" alt="${furniture.name}" class="furniture-card-img"/>
+          <img src="${firstImage}" alt="${furniture.name}" class="furniture-card-img" loading="lazy" decoding="async"/>
           <p class="furniture-name">${furniture.name}</p>
           <div class="color-options">${colorCheckboxes}</div>
           <p class="furniture-price">${furniture.price} грн</p>
