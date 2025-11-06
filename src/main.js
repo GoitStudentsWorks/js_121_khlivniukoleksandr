@@ -1,3 +1,4 @@
+import './js/header.js';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import { LIMIT } from './js/constants';
