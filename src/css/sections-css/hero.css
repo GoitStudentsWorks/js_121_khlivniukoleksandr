@@ -1,4 +1,4 @@
-/* ============ HERO ============== */
+/* ========= HERO ======== */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -10,6 +10,36 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  justify-content: flex-start; 
+}
+
+.hero .container {
+  margin-left: 0;  
+  margin-right: auto;
+}
+
+/* ==== HERO CONTAINER ВІДСТУПИ ==== */
+
+/* Мобільна версія */
+@media (max-width: 767px) {
+  .hero .container {
+    padding-left: 19.5px;
+    padding-right: 20.5px;
+  }
+}
+
+/* Планшетна версія */
+@media (min-width: 768px) and (max-width: 1439px) {
+  .hero .container {
+    padding-left: 31.5px;
+  }
+}
+
+/* Десктопна версія */
+@media (min-width: 1440px) {
+  .hero .container {
+    padding-left: 63px;
+  }
 }
 
 /* Фонове зображення + затемнення */
@@ -56,13 +86,13 @@
 /* ======= HERO__CONTENT ====== */
 .hero__content {
   text-align: left;
-  padding: 0 15px;
 }
+
 
 /* Планшет */
 @media (min-width: 768px) and (max-width: 1439px) {
   .hero__content {
-    padding: 0 40px;
+ padding: 0 40px;
   }
 }
 
@@ -118,7 +148,6 @@
 @media (min-width: 1440px) {
   .hero__subtitle {
     width: 560px;
-    
   }
 }
 
@@ -134,7 +163,6 @@
   font-family: 'Raleway', sans-serif;
   font-weight: 500;
   font-size: 16px;
-  text-align: center;
   cursor: pointer;
   border: none;
   transition: all 0.3s ease;
