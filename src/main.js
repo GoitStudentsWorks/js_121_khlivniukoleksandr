@@ -46,7 +46,7 @@ refs.loadButton.addEventListener('click', async () => {
   if (firstCard) {
     const cardHeight = firstCard.getBoundingClientRect().height;
     window.scrollBy({
-      top: cardHeight * 4,
+      top: cardHeight * 6.5,
       behavior: 'smooth',
     });
   }
