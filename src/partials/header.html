@@ -1,13 +1,21 @@
 <header class="header" id="header">
   <div class="container header-container">
+
+    <!-- Logo -->
     <a href="./index.html" class="logo-link" aria-label="Логотип компанії">
-      <svg class="company-icon" width="159" height="35">
-        <use href="./img/sprite.svg#company-logo"></use>
+      <svg
+        class="company-icon"
+        width="184"
+        height="35"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <use href="./img/icons.svg#icon-logotype"></use>
       </svg>
     </a>
 
-    <!-- Desktop nav -->
-    <nav class="desktop-nav" aria-label="Основна навігація">
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav desktop-only" aria-label="Основна навігація">
       <ul class="nav-list">
         <li class="nav-list-item"><a href="#furniture" class="nav-link">Наші меблі</a></li>
         <li class="nav-list-item"><a href="#about-us" class="nav-link">Про нас</a></li>
@@ -16,25 +24,32 @@
       </ul>
     </nav>
 
+    <!-- Desktop CTA Button -->
+    <a href="#furniture" class="header-buy-button desktop-only">До покупок</a>
 
-    <a href="#furniture" class="button header-buy-button">До покупок</a>
-
-    <!-- Burger (mobile/tablet) -->
+    <!-- Burger Button -->
     <button
       type="button"
-      class="burger-menu-btn js-open-menu"
+      class="burger-menu-btn mobile-only js-open-menu"
       aria-expanded="false"
       aria-controls="mobile-menu"
       aria-label="Відкрити меню"
     >
-      <svg class="burger-icon" width="28" height="28">
-        <use href="./img/sprite.svg#icon-burger"></use>
+      <svg class="burger-icon" width="28" height="28" aria-hidden="true">
+        <use href="./img/icons.svg#icon-menu"></use>
       </svg>
     </button>
 
-    <!-- Mobile menu -->
-    <div class="mobile-menu-container js-menu-container" id="mobile-menu" aria-hidden="true">
-      <div class="container mobile-menu-content">
+    <!-- Mobile Menu -->
+    <div
+      class="mobile-menu-container js-menu-container"
+      id="mobile-menu"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+    >
+      <div class="container mobile-menu-content" tabindex="-1">
+
         <nav aria-label="Мобільна навігація">
           <ul class="mobile-menu-list">
             <li><a href="#furniture" class="nav-link js-close-menu">Наші меблі</a></li>
@@ -43,8 +58,11 @@
             <li><a href="#feedback" class="nav-link js-close-menu">Відгуки</a></li>
           </ul>
         </nav>
+
         <a href="#furniture" class="mobile-order-btn js-close-menu">До покупок</a>
+
       </div>
     </div>
+
   </div>
 </header>
