@@ -12,6 +12,7 @@ import {
   showButtonLoad,
   showLoader,
 } from './js/render-functions';
+import { renderFeedback, fetchFeedback } from './js/feedback';
 
 let currentCategoryId = null;
 
@@ -82,3 +83,11 @@ export const onCategoryClick = async event => {
 refs.categoryList.addEventListener('click', onCategoryClick);
 
 renderFaqAccordion();
+
+const createFeedbackSection = async () => {
+  const feedbackData = await fetchFeedback();
+
+  renderFeedback(feedbackData.feedbacks);
+};
+
+createFeedbackSection();
