@@ -1,136 +1,148 @@
 (() => {
   const menu = document.querySelector('.js-menu-container');
-  const btn  = document.querySelector('.js-open-menu');
+  const btn = document.querySelector('.js-open-menu');
   if (!menu || !btn) return;
 
-  // Іконки з icons.svg
-  const ICON_CLOSED = 'icon-menu';
-  const ICON_OPENED = 'icon-close';
+  // ===== Іконки зі sprite.svg
+  const ICON_CLOSED = 'icon-menu';   // бургер
+  const ICON_OPENED = 'icon-close';  // хрестик
 
+  // <use> всередині кнопки
   const iconUse = btn.querySelector('use');
+
+  // База посилання на sprite (підтримка href та xlink:href)
   const getSpriteBase = () => {
     if (!iconUse) return null;
     const href = iconUse.getAttribute('href') || iconUse.getAttribute('xlink:href');
-    return href ? href.split('#')[0] : null;
+    if (!href) return null;
+    // очікуємо формат "./img/icons.svg#id" або "img/icons.svg#id"
+    return href.split('#')[0] || null;
   };
+
+  // Перемкнути іконку в кнопці
   const setIcon = id => {
     const base = getSpriteBase();
     if (!base || !iconUse) return;
     iconUse.setAttribute('href', `${base}#${id}`);
-    iconUse.setAttribute('xlink:href', `${base}#${id}`); // сумісність
+    iconUse.setAttribute('xlink:href', `${base}#${id}`); // для сумісності
   };
 
-  // Пошук фокусованих елементів у меню для focus trap
-  const focusablesSelector = [
-    'a[href]', 'button:not([disabled])', '[tabindex]:not([tabindex="-1"])'
-  ].join(',');
-  const firstFocusable = () => menu.querySelector(focusablesSelector);
-  const focusables = () => Array.from(menu.querySelectorAll(focusablesSelector));
-
-  // Приховати фон для скрінрідерів
+  // Аксесібіліті: приховати/показати усіх сусідів, крім хедера і самого меню
   const setSiblingsAriaHidden = (hidden) => {
-    const skip = new Set([menu, btn.closest('.header')]);
-    Array.from(document.body.children).forEach(el => {
-      if (!skip.has(el)) el.setAttribute('aria-hidden', hidden ? 'true' : 'false');
+    const header = document.getElementById('header');
+    [...document.body.children].forEach(el => {
+      if (el === header || el === menu) return;
+      el.setAttribute('aria-hidden', hidden ? 'true' : 'false');
     });
   };
 
-  // Компенсація зникнення скролбара
-  const applyScrollbarCompensation = (on) => {
-    const sbw = window.innerWidth - document.documentElement.clientWidth;
-    document.body.style.paddingRight = on && sbw ? `${sbw}px` : '';
+  // Компенсація ширини скролбару, щоб не "стрибав" контент
+  const applyScrollbarCompensation = (enable) => {
+    const hasVerticalScroll = window.innerWidth > document.documentElement.clientWidth;
+    const scrollbar = hasVerticalScroll ? (window.innerWidth - document.documentElement.clientWidth) : 0;
+    document.documentElement.style.setProperty(
+      '--scrollbar-comp',
+      enable ? `${scrollbar}px` : '0px'
+    );
+    // При бажанні можете ще додати padding-right до фіксованих хедерів, якщо треба
   };
 
-  let onDocKeydown = null;
-  let onDocClickOutside = null;
+  let onKeydown = null;
+  let onClickOutside = null;
 
   const addDynamicListeners = () => {
-    if (!onDocKeydown) {
-      onDocKeydown = (e) => {
-        // Escape
-        if (e.key === 'Escape') { closeMenu(); return; }
-
-        // Focus trap по Tab
-        if (e.key === 'Tab' && menu.classList.contains('is-open')) {
-          const nodes = focusables();
-          if (!nodes.length) return;
-          const first = nodes[0];
-          const last  = nodes[nodes.length - 1];
-
-          if (e.shiftKey && document.activeElement === first) {
-            e.preventDefault(); last.focus();
-          } else if (!e.shiftKey && document.activeElement === last) {
-            e.preventDefault(); first.focus();
-          }
-        }
-      };
-      document.addEventListener('keydown', onDocKeydown);
-    }
-    if (!onDocClickOutside) {
-      onDocClickOutside = (e) => {
+    if (!onClickOutside) {
+      onClickOutside = (e) => {
         if (!menu.contains(e.target) && !btn.contains(e.target)) closeMenu();
       };
-      document.addEventListener('click', onDocClickOutside);
+      document.addEventListener('click', onClickOutside);
+    }
+
+    if (!onKeydown) {
+      onKeydown = (e) => {
+        if (e.key === 'Escape') closeMenu();
+      };
+      document.addEventListener('keydown', onKeydown);
     }
   };
 
   const removeDynamicListeners = () => {
-    if (onDocKeydown) document.removeEventListener('keydown', onDocKeydown);
-    if (onDocClickOutside) document.removeEventListener('click', onDocClickOutside);
-    onDocKeydown = onDocClickOutside = null;
+    if (onKeydown) document.removeEventListener('keydown', onKeydown);
+    if (onClickOutside) document.removeEventListener('click', onClickOutside);
+    onKeydown = null;
+    onClickOutside = null;
   };
 
+  // Відкрити меню
   const openMenu = () => {
     menu.classList.add('is-open');
+
     btn.setAttribute('aria-expanded', 'true');
     btn.setAttribute('aria-label', 'Закрити мобільне меню');
-    menu.setAttribute('aria-hidden', 'false');
-    setSiblingsAriaHidden(true);
-    setIcon(ICON_OPENED);
 
+    // Робимо фон (сусідів) недоступним для читачів екрану
+    setSiblingsAriaHidden(true);
+    // Саме меню — видиме для читачів
+    menu.setAttribute('aria-hidden', 'false');
+
+    // Лочимо скрол і компенсуємо скролбар
     document.body.classList.add('no-scroll');
     applyScrollbarCompensation(true);
 
-    // Переносимо фокус усередину меню
-    setTimeout(() => (firstFocusable() || menu).focus(), 0);
+    // Іконка: бургер -> хрестик
+    setIcon(ICON_OPENED);
+
+    // Поставити фокус усередину
+    const focusableSelector = [
+      'a[href]',
+      'button:not([disabled])',
+      '[tabindex]:not([tabindex="-1"])',
+      'input:not([disabled])',
+      'select:not([disabled])',
+      'textarea:not([disabled])'
+    ].join(',');
+
+    const firstFocusable = menu.querySelector(focusableSelector);
+    setTimeout(() => (firstFocusable || menu).focus(), 0);
 
     addDynamicListeners();
   };
 
+  // Закрити меню
   const closeMenu = () => {
     menu.classList.remove('is-open');
+
     btn.setAttribute('aria-expanded', 'false');
     btn.setAttribute('aria-label', 'Відкрити мобільне меню');
-    menu.setAttribute('aria-hidden', 'true');
-    setSiblingsAriaHidden(false);
-    setIcon(ICON_CLOSED);
 
+    // Повертаємо доступність фону
+    setSiblingsAriaHidden(false);
+    menu.setAttribute('aria-hidden', 'true');
+
+    // Розлочуємо скрол, прибираємо компенсацію
     document.body.classList.remove('no-scroll');
     applyScrollbarCompensation(false);
+
+    // Іконка: хрестик -> бургер
+    setIcon(ICON_CLOSED);
 
     removeDynamicListeners();
     btn.focus();
   };
 
-  const toggleMenu = () => (
-    menu.classList.contains('is-open') ? closeMenu() : openMenu()
-  );
+  // Тоглер
+  const toggleMenu = () => {
+    if (menu.classList.contains('is-open')) closeMenu();
+    else openMenu();
+  };
 
+  // Клік по кнопці
   btn.addEventListener('click', toggleMenu);
-  menu.querySelectorAll('.nav-link, .mobile-order-btn')
-      .forEach(a => a.addEventListener('click', () => {
-        if (menu.classList.contains('is-open')) closeMenu();
-      }));
 
-  // Закриття при переході на десктоп
-  const mq = window.matchMedia('(min-width: 1440px)');
-  const handleMq = e => e.matches && menu.classList.contains('is-open') && closeMenu();
-  mq.addEventListener?.('change', handleMq);
-  mq.addListener?.(handleMq); // для старих Safari
-
-  window.addEventListener('beforeunload', () => {
-    removeDynamicListeners();
-    mq.removeEventListener?.('change', handleMq);
-    mq.removeListener?.(handleMq);
+  // Закриття по посиланнях меню
+  menu.addEventListener('click', (e) => {
+    const link = e.target.closest('.js-close-menu');
+    if (link) closeMenu();
   });
+
 })();

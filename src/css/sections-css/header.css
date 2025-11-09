@@ -49,8 +49,9 @@
 
 .burger-icon {
   display: block;
-  width: 28px;
-  height: 28px;
+  /* ВИПРАВЛЕНО: Розмір іконки бургер-меню по макету */
+  width: 32px;
+  height: 32px;
   stroke: #080c09;
 }
 
@@ -162,20 +163,27 @@ body.no-scroll {
   overflow: hidden;
 }
 
-/* ======================= TABLET (768–1439.98) ======================= */
-@media (min-width: 768px) and (max-width: 1439.98px) {
+/* ======================= TABLET (>=768) ======================= */
+@media (min-width: 768px) {
+  /* Відступи для .header-container на планшеті */
+  .header-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
   .desktop-nav { display: none; }
   .burger-menu-btn { display: flex; }
 
   /* картка меню справа ПІД хедером — без щілин і без тіні */
   .mobile-menu-container {
     position: fixed;
-    top: calc(var(--header-h) - 1px);  /* щільно до хедера */
+    top: calc(var(--header-h) - 1px);
     right: 0;
     left: auto;
 
-    width: 344px;
-    max-width: 344px;
+    /* ВИПРАВЛЕНО: Ширина меню по макету */
+    width: 249px;
+    max-width: 249px;
 
     height: auto;
     max-height: calc(100vh - var(--header-h) + 1px);
@@ -184,7 +192,7 @@ body.no-scroll {
     background: #ffffff;
     box-shadow: none;
     border-radius: 8px;
-    border-top-left-radius: 0; /* щільно до хедера зліва */
+    border-top-left-radius: 0;
     border-top-right-radius: 8px;
 
     transform: translateY(-12px);
@@ -199,44 +207,61 @@ body.no-scroll {
     pointer-events: auto;
   }
 
-  .mobile-menu-content { padding: 16px; }
-
-  .mobile-menu-list {
-    text-align: left;
-    margin-bottom: 16px;
+  .mobile-menu-content { 
+    /* Відступи по макету (16px зверху/знизу, 8px з боків) */
+    padding: 16px 8px; 
+    /* Скидаємо мобільні стилі */
+    padding-top: 16px;
+    padding-bottom: 16px;
+    height: auto; /* Дозволяємо вмісту визначати висоту */
   }
 
-  .mobile-menu-list li:not(:last-child) { margin-bottom: 12px; }
+  .mobile-menu-list {
+    text-align: right;
+    /* Відступ між списком і кнопкою */
+    margin-bottom: 32px;
+  }
+
+  .mobile-menu-list li:not(:last-child) {
+    /* Відступ між пунктами меню */
+    margin-bottom: 24px;
+  }
 
   .mobile-order-btn {
     width: 168px;
     height: 36px;
     padding: 8px 16px;
+    /* Центруємо кнопку */
     margin-left: auto;
+    margin-right: auto;
+    /* Скидаємо мобільний відступ */
+    margin-top: 0;
   }
 }
 
 /* ======================= DESKTOP (>=1440) ======================= */
 @media (min-width: 1440px) {
+  /* Відновлюємо відступи .container для десктопа */
+  .header-container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
   .burger-menu-btn,
   .mobile-menu-container,
   .mobile-menu-backdrop {
     display: none;
   }
-
   .desktop-nav { display: block; }
-
   .desktop-nav .nav-list {
     display: flex;
     align-items: center;
     gap: 32px;
   }
-
   .desktop-nav {
     margin-left: auto;
     margin-right: 40px;
   }
-
   a.header-buy-button {
     display: inline-flex;
     align-items: center;
@@ -250,8 +275,7 @@ body.no-scroll {
     font-weight: 500;
     font-size: 16px;
     text-decoration: none;
-    box-shadow:
-      0 1px 2px rgba(8, 12, 9, 0.05),
+    box-shadow: 0 1px 2px rgba(8, 12, 9, 0.05),
       inset 0 -2px 1px rgba(0, 0, 0, 0.2),
       inset 0 0 0 1px rgba(8, 12, 9, 0.15),
       inset 0 2px 1px rgba(49, 47, 47, 0.25),
@@ -260,11 +284,10 @@ body.no-scroll {
 }
 
 /* ======================= BACKDROP (CSS-only) ======================= */
-/* Хедер не затемнюємо: бекдроп починається ПІД ним, і теж з -1px */
 body::before {
   content: "";
   position: fixed;
-  top: calc(var(--header-h) - 1px);  /* ключ до зникнення тонкої смуги */
+  top: calc(var(--header-h) - 1px);
   left: 0;
   right: 0;
   bottom: 0;
@@ -272,12 +295,9 @@ body::before {
   opacity: 0;
   pointer-events: none;
   transition: opacity 250ms ease;
-  z-index: 998; /* нижче меню (999) і хедера (1000) */
+  z-index: 998;
 }
-
-/* Активний бекдроп разом із блокуванням скролу */
 body.no-scroll::before {
   opacity: 1;
   pointer-events: auto;
 }
-

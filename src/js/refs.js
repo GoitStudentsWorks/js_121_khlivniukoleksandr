@@ -17,7 +17,13 @@ export const refs = {
   furnitureList: document.querySelector('.furniture-list'),
   loader: document.querySelector('.loader'),
   loadButton: document.querySelector('.button-load-more-furnitures'),
+  feedbackSwiper: document.querySelector('.feedback-swiper'),
+  modalBackdrop: document.querySelector('.modal-furniture-backdrop'),
+  modalGallery: document.querySelector('.modal-furniture-gallery'),
+  modalInfo: document.querySelector('.modal-furniture-info'),
 };
+
+refs.feedbackWrapper = refs.feedbackSwiper?.querySelector('.swiper-wrapper');
 
 export const categoryBackgroundImg = {
   all,

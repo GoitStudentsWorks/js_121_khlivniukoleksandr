@@ -2,7 +2,7 @@ import './js/header.js';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import { LIMIT } from './js/constants';
-import { getCategories, getProducts } from './js/handlers';
+import { getCategories, getIdProduct, getProducts } from './js/handlers';
 import { fetchFurniture, getPage, incrementPage } from './js/products-api';
 import { refs } from './js/refs';
 import {
@@ -13,6 +13,7 @@ import {
   showButtonLoad,
   showLoader,
 } from './js/render-functions';
+import { renderFeedback, fetchFeedback } from './js/feedback';
 
 let currentCategoryId = null;
 
@@ -46,7 +47,7 @@ refs.loadButton.addEventListener('click', async () => {
   if (firstCard) {
     const cardHeight = firstCard.getBoundingClientRect().height;
     window.scrollBy({
-      top: cardHeight * 4,
+      top: cardHeight * 6.5,
       behavior: 'smooth',
     });
   }
@@ -83,3 +84,24 @@ export const onCategoryClick = async event => {
 refs.categoryList.addEventListener('click', onCategoryClick);
 
 renderFaqAccordion();
+
+const createFeedbackSection = async () => {
+  const feedbackData = await fetchFeedback();
+
+  renderFeedback(feedbackData.feedbacks);
+};
+
+createFeedbackSection();
+
+const furnitureListID = refs.furnitureList;
+furnitureListID.addEventListener('click', event => {
+  if (event.target.classList.contains('button-furnitures-detail')) {
+    const productCard = event.target.closest('.product-card');
+    if (productCard) {
+      refs.modalGallery.innerHTML = '';
+      refs.modalInfo.innerHTML = '';
+      const productId = productCard.dataset.id;
+      getIdProduct(productId);
+    }
+  }
+});

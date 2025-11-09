@@ -1,0 +1,49 @@
+.about-us {
+  background-color: #f0e6e6;
+  padding: 64px 0;
+}
+
+.about-us-title {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 120%;
+  letter-spacing: 0.01em;
+  margin-bottom: 24px;
+}
+.about-us-content {
+  margin-bottom: 24px;
+}
+.about-us-image {
+  border-radius: 8px;
+  width: 335px;
+  height: 436px;
+}
+@media screen and (min-width: 768px) {
+  .about-us {
+    padding: 32px 0;
+  }
+  .about-us-image {
+    width: 704px;
+    height: 436px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .about-us {
+    padding: 64px 0;
+  }
+  .about-us-content {
+    max-width: 647px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .about-us-container {
+    display: flex;
+    gap: 24px;
+  }
+  .about-us-cont-image {
+    width: 644px;
+    height: 436px;
+  }
+}
