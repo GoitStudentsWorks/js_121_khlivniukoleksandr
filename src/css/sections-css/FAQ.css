@@ -45,7 +45,7 @@
 
 .faq-section .ac .ac-trigger::after {
   content: '';
-  background-image: url('../img/accordion-icon.svg');
+  background-image: url('/img/accordion-icon.svg');
   position: absolute;
   right: 0;
   top: 50%;
