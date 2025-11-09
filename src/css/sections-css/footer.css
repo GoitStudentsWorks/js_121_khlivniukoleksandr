@@ -1,27 +1,20 @@
-footer{
-  background-color: #6B0609;
+footer {
+  background-color: #6b0609;
   color: #ffff;
-  padding: 25px 0;
   text-align: center;
-  }
-.footer{
+}
+.footer {
   display: flex;
   flex-direction: column;
 }
 
-.footer-logo {
-  font-size: 32px;
-  font-weight: 600;
-  color: #ffff;
-}
-
 .nav-list-footer {
-margin-top: 48px;
-justify-self: center;
-display: flex;
-flex-direction: column;
-gap: 32px;
-margin-bottom: 34px;
+  margin-top: 48px;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 34px;
 }
 
 .nav-list-footer-item a {
@@ -31,6 +24,9 @@ margin-bottom: 34px;
   transition: opacity 0.3s ease;
 }
 
+.nav-list-footer-item a:hover {
+  opacity: 0.6;
+}
 .social-media-list {
   display: flex;
   justify-content: center;
@@ -43,57 +39,63 @@ margin-bottom: 34px;
 
 .icon {
   fill: #ffff;
+  transition: opacity 300ms ease;
+}
+.icon:hover {
+  opacity: 0.5;
 }
 .copyright {
   font-size: 14px;
   color: #ffff;
+  margin-bottom: 32px !important;
 }
 
-@media only screen and (min-width: 768px) {
-.nav-list-footer{
-  flex-direction: row;
+@media screen and (min-width: 768px) {
+  .nav-list-footer {
+    flex-direction: row;
+    justify-content: center;
+  }
 }
-}
-@media only screen and (min-width: 1440px) {
-  .footer{
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .footer-left {
-      display: flex;
-     flex-direction: row;
-     align-items: center;
+@media screen and (min-width: 1440px) {
+  .footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     gap: 80px;
-         }
+  }
   .footer-right {
     display: flex;
     flex-direction: row;
     gap: 80px;
-   align-items: center;
-   }
-    
-   .nav-list-footer {
+    align-items: center;
+  }
+
+  .nav-list-footer {
     flex-direction: row;
     gap: 32px;
     align-items: center;
     margin: 0 auto;
-    }
+  }
 
   .social-media-list {
-   margin: 0 auto;
-  } 
-    .desktop {
-      display: block;
-    }
-  
-    .mobile {
-      display: none;
-    }
-  } 
+    margin: 0 auto;
+  }
+  .desktop {
+    display: block;
+  }
 
-
-
+  .mobile {
+    display: none;
+  }
+  .copyright {
+    margin-bottom: 0 !important;
+  }
+}
