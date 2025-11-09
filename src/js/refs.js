@@ -43,3 +43,5 @@ export const categoryBackgroundImg = {
   '66504a50a1b2c3d4e5f6a7ba': bed,
   '66504a50a1b2c3d4e5f6a7bc': chair,
 };
+
+export const stars = {};
