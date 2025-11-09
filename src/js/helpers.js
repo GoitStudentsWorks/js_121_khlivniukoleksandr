@@ -1,3 +1,6 @@
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
+
 import { refs } from './refs';
 
 const nameLabel = document.querySelector('[for="modal-order-name"]');
@@ -69,4 +72,15 @@ export const submitOrderForm = async event => {
   if (hasError) return;
   closeOrderModal();
   refs.orderModalForm.reset();
+  iziToast.success({
+    message: 'Your order successfully created',
+    position: 'topRight',
+    timeout: 4000,
+    progressBar: true,
+    close: true,
+    transitionIn: 'fadeInUp',
+    transitionOut: 'fadeOut',
+    backgroundColor: '#4CAF50',
+    messageColor: '#fff',
+  });
 };
