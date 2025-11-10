@@ -1,4 +1,4 @@
-import { categoryBackgroundImg, refs } from './refs';
+import { categoryBackgroundImg, categoryBackgroundImgWebp, refs } from './refs';
 import Accordion from 'accordion-js';
 import 'accordion-js/dist/accordion.min.css';
 
@@ -9,19 +9,31 @@ export const renderCategories = data => {
     .map(category => {
       if (typeof category === 'string') {
         const background = categoryBackgroundImg['all'];
+        const backgroundWebp = categoryBackgroundImgWebp['allWebp'];
         return `
-          <li class="furniture-categories-list-item" style="background-image: url('${background}')">
-            <span class="category-name">${category}</span>
-          </li>
+          <li class="furniture-categories-list-item"
+      style="background-image: image-set(
+        url('${backgroundWebp}') type('image/webp'),
+        url('${background}') type('image/jpeg')
+      );">
+    <span class="category-name">${category}</span>
+  </li>
         `;
       }
 
       const background = categoryBackgroundImg[category._id];
+      const backgroundWebp = categoryBackgroundImgWebp[category._id];
+
       return `
-        <li class="furniture-categories-list-item" style="background-image: url('${background}')" data-id="${category._id}">
-          <p class="category-name">${category.name}</p>
-        </li>
-      `;
+  <li class="furniture-categories-list-item"
+      style="background-image: image-set(
+        url('${backgroundWebp}') type('image/webp'),
+        url('${background}') type('image/jpeg')
+      );"
+      data-id="${category._id}">
+    <p class="category-name">${category.name}</p>
+  </li>
+`;
     })
     .join('');
 

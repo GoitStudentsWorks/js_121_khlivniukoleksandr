@@ -1,4 +1,33 @@
 <section class="hero">
+  <picture>
+    <!-- WebP retina -->
+    <source
+      srcset="
+        /img/hero-fon/fon-hero-desktop@2x-webp.webp 2x,
+        /img/hero-fon/fon-hero-desktop-webp.webp    1x
+      "
+      type="image/webp"
+      fetchpriority="high"
+    />
+    <!-- JPEG retina  -->
+    <source
+      srcset="
+        /img/hero-fon/fon-hero-desktop@2x.jpg 2x,
+        /img/hero-fon/fon-hero-desktop.jpg    1x
+      "
+      type="image/jpeg"
+      fetchpriority="high"
+    />
+
+    <img
+      src="/img/hero-fon/fon-hero-desktop.jpg"
+      alt="Ідеальний дім"
+      decoding="async"
+      class="hero-bg"
+      fetchpriority="high"
+    />
+  </picture>
+
   <div class="container">
     <div class="hero__container">
       <!-- Контент HERO -->

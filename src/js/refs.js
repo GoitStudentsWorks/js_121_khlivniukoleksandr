@@ -11,6 +11,21 @@ import office from '../img/furniture-list/9office_furnitures.jpg';
 import wardrobe from '../img/furniture-list/3wardrobe.jpg';
 import bed from '../img/furniture-list/4beds.jpg';
 import chair from '../img/furniture-list/6chairs.jpg';
+// Webp
+
+import allWebp from '../img/furniture-list/webp/1all_products.webp';
+import kitchenWebp from '../img/furniture-list/webp/7kitchens.webp';
+import hallwayWebp from '../img/furniture-list/webp/10furniture_hallway.webp';
+import gardenWebp from '../img/furniture-list/webp/12garden_furnitures.webp';
+import tableWebp from '../img/furniture-list/webp/5tables.webp';
+import sofaWebp from '../img/furniture-list/webp/2sofas.webp';
+import childWebp from '../img/furniture-list/webp/8child_furniture.webp';
+import accesoiresWebp from '../img/furniture-list/webp/13accessoires.webp';
+import washroomWebp from '../img/furniture-list/webp/11furniture_washrooms.webp';
+import officeWebp from '../img/furniture-list/webp/9office_furnitures.webp';
+import wardrobeWebp from '../img/furniture-list/webp/3wardrobe.webp';
+import bedWebp from '../img/furniture-list/webp/4beds.webp';
+import chairWebp from '../img/furniture-list/webp/6chairs.webp';
 
 export const refs = {
   categoryList: document.querySelector('.furniture-categories-list'),
@@ -42,6 +57,22 @@ export const categoryBackgroundImg = {
   '66504a50a1b2c3d4e5f6a7b9': wardrobe,
   '66504a50a1b2c3d4e5f6a7ba': bed,
   '66504a50a1b2c3d4e5f6a7bc': chair,
+};
+
+export const categoryBackgroundImgWebp = {
+  allWebp,
+  '66504a50a1b2c3d4e5f6a7bd': kitchenWebp,
+  '66504a50a1b2c3d4e5f6a7c0': hallwayWebp,
+  '66504a50a1b2c3d4e5f6a7c2': gardenWebp,
+  '66504a50a1b2c3d4e5f6a7bb': tableWebp,
+  '66504a50a1b2c3d4e5f6a7b8': sofaWebp,
+  '66504a50a1b2c3d4e5f6a7be': childWebp,
+  '66504a50a1b2c3d4e5f6a7c3': accesoiresWebp,
+  '66504a50a1b2c3d4e5f6a7c1': washroomWebp,
+  '66504a50a1b2c3d4e5f6a7bf': officeWebp,
+  '66504a50a1b2c3d4e5f6a7b9': wardrobeWebp,
+  '66504a50a1b2c3d4e5f6a7ba': bedWebp,
+  '66504a50a1b2c3d4e5f6a7bc': chairWebp,
 };
 
 export const stars = {};
